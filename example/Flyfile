@@ -1,2 +1,0 @@
-FROM jpillora/chisel
-ENTRYPOINT ["/app/bin", "server", "--port", "443", "--tls-domain", "chisel.jpillora.com"]
