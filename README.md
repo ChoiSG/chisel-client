@@ -1,3 +1,21 @@
+# chisel-client 
+
+```
+# client 
+GOOS=linux GOARCH=amd64 go build -o updater
+sed -i 's/chisel/chezel/g' updater
+
+# Server 
+wget https://github.com/jpillora/chisel/releases/download/v1.10.1/chisel_1.10.1_linux_amd64.gz
+gzip -d chisel_1.10.1_linux_amd64.gz
+sed -i 's/chisel/chezel/g' chisel_1.10.1_linux_amd64
+
+# Test 
+chmod +x updater 
+./updater client 192.168.40.100:8000 R:socks
+./chisel_1.10.1_linux_amd64 server -p 8000 --reverse --socks5
+```
+
 # Chisel
 
 [![GoDoc](https://godoc.org/github.com/jpillora/chisel?status.svg)](https://godoc.org/github.com/jpillora/chisel) [![CI](https://github.com/jpillora/chisel/workflows/CI/badge.svg)](https://github.com/jpillora/chisel/actions?workflow=CI)
