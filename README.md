@@ -12,7 +12,7 @@ Static detection bypasses:
 
 ```
 # client 
-GOOS=linux GOARCH=amd64 go build -o updater
+GOOS=linux GOARCH=amd64 go build -ldflags="-s -w -buildid= -X main.debug=false -X main.version= -X main.commit= -X main.date=" -trimpath -o updater
 sed -i 's/chisel/chezel/g' updater
 sed -i 's/CHISEL/CHEZEL/g' updater
 
