@@ -24,13 +24,13 @@ func (t *Tunnel) handleSSHRequests(reqs <-chan *ssh.Request) {
 	}
 }
 
-func (t *Tunnel) handleSSHChannels(chans <-chan ssh.NewChannel) {
+func (t *Tunnel) handleSSHChanels(chans <-chan ssh.NewChannel) {
 	for ch := range chans {
-		go t.handleSSHChannel(ch)
+		go t.handleSSHChanel(ch)
 	}
 }
 
-func (t *Tunnel) handleSSHChannel(ch ssh.NewChannel) {
+func (t *Tunnel) handleSSHChanel(ch ssh.NewChannel) {
 	if !t.Config.Outbound {
 		t.Debugf("Denied outbound connection")
 		ch.Reject(ssh.Prohibited, "Denied outbound connection")

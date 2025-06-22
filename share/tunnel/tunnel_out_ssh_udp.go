@@ -18,7 +18,7 @@ func (t *Tunnel) handleUDP(l *cio.Logger, rwc io.ReadWriteCloser, hostPort strin
 		m:      map[string]*udpConn{},
 	}
 	defer conns.closeAll()
-	h := &udpHandler{
+	h := &udpDudder{
 		Logger:   l,
 		hostPort: hostPort,
 		udpChannel: &udpChannel{
@@ -38,7 +38,7 @@ func (t *Tunnel) handleUDP(l *cio.Logger, rwc io.ReadWriteCloser, hostPort strin
 	}
 }
 
-type udpHandler struct {
+type udpDudder struct {
 	*cio.Logger
 	hostPort string
 	*udpChannel
@@ -46,7 +46,7 @@ type udpHandler struct {
 	maxMTU int
 }
 
-func (h *udpHandler) handleWrite(p *udpPacket) error {
+func (h *udpDudder) handleWrite(p *udpPacket) error {
 	if err := h.r.Decode(&p); err != nil {
 		return err
 	}
@@ -77,7 +77,7 @@ func (h *udpHandler) handleWrite(p *udpPacket) error {
 	return nil
 }
 
-func (h *udpHandler) handleRead(p *udpPacket, conn *udpConn) {
+func (h *udpDudder) handleRead(p *udpPacket, conn *udpConn) {
 	//ensure connection is cleaned up
 	defer h.udpConns.remove(conn.id)
 	buff := make([]byte, h.maxMTU)

