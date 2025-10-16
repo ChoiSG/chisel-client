@@ -38,6 +38,10 @@ sed -i 's/chisel/chezel/g' garbleoutput
 sed -i 's/CHISEL/CHEZEL/g' garbleoutput
 ```
 
+### Upload to VT to stop potential abuses 
+
+- Uploaded the binary to VT to stop abuses [https://www.virustotal.com/gui/file/b2a9bcd2f25db934ca7ecb6326d26c6cd2d45d8e4375ba37a515305a45f89013](https://www.virustotal.com/gui/file/b2a9bcd2f25db934ca7ecb6326d26c6cd2d45d8e4375ba37a515305a45f89013)
+
 # Chisel
 
 [![GoDoc](https://godoc.org/github.com/jpillora/chisel?status.svg)](https://godoc.org/github.com/jpillora/chisel) [![CI](https://github.com/jpillora/chisel/workflows/CI/badge.svg)](https://github.com/jpillora/chisel/actions?workflow=CI)
